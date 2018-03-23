@@ -1,0 +1,20 @@
+{
+  "name": "pagevamp/laravel-stack-driver-logger",
+  "autoload": {
+    "psr-4": {
+      "Pagevamp\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Sajjan",
+      "email": "s4jj4n@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4",
+    "google/cloud-logging": "1.8.0",
+    "illuminate/support": "^4.0|^5.0"
+  },
+  "license": "MIT"
+}
