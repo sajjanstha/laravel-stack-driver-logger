@@ -1,5 +1,5 @@
 {
-  "name": "pagevamp/laravel-stack-driver",
+  "name": "pagevamp/laravel-stack-driver-logger",
   "autoload": {
     "psr-4": {
       "Pv\\": "src/"
