@@ -2,7 +2,7 @@
   "name": "pagevamp/laravel-stack-driver-logger",
   "autoload": {
     "psr-4": {
-      "Pv\\": "src/"
+      "Pagevamp\\": "src/"
     }
   },
   "authors": [

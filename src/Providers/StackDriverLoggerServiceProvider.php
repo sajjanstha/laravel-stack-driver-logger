@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace Pagevamp\Providers;
 
 use Google\Cloud\Logging\PsrLogger;
 use Illuminate\Support\ServiceProvider;
