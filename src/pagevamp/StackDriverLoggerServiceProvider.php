@@ -5,7 +5,6 @@ namespace App\Providers;
 use Google\Cloud\Logging\PsrLogger;
 use Illuminate\Support\ServiceProvider;
 use Google\Cloud\Logging\LoggingClient;
-use Symfony\Component\Debug\Exception\FatalErrorException;
 
 class StackDriverLoggerServiceProvider extends ServiceProvider
 {
@@ -31,7 +30,7 @@ class StackDriverLoggerServiceProvider extends ServiceProvider
                 $context = $args[2];
             }
 
-            if ($message instanceof FatalErrorException) {
+            if ($message instanceof \ErrorException) {
                 return $this->getLogger($this->getKeyFile())->log($level, $message, $context);
             }
             if ($app['google.logger'] instanceof PsrLogger) {
