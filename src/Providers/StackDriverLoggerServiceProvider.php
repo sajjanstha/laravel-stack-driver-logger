@@ -31,7 +31,7 @@ class StackDriverLoggerServiceProvider extends ServiceProvider
             }
 
             if ($message instanceof \ErrorException) {
-                return $this->getLogger($this->getKeyFile())->log($level, $message, $context);
+                return $this->getLogger()->log($level, $message, $context);
             }
             if ($app['google.logger'] instanceof PsrLogger) {
                 $app['google.logger']->log($level, $message, $context);
@@ -46,26 +46,29 @@ class StackDriverLoggerServiceProvider extends ServiceProvider
     {
         $this->app->singleton('google.logger', function () {
             try {
-                return $this->getLogger($this->getKeyFile(), true);
+                return $this->getLogger(true);
             } catch (\Exception $error) {
                 return app('log');
             }
         });
     }
 
-    protected function getLogger($keyFile, $batchEnabled = false)
+    protected function getLogger($batchEnabled = false)
     {
-        $logging = new  LoggingClient([
-            'keyFile' => $keyFile,
-        ]);
+        $logging = new LoggingClient($this->getCredentials());
 
-        return $logging->psrLogger('vamp-log', [
+        return $logging->psrLogger($this->getLogName(), [
             'batchEnabled' => $batchEnabled,
         ]);
     }
 
-    protected function getKeyFile()
+    protected function getCredentials()
     {
-        return json_decode(trim(env('GC_LOG_SERVICE_CRED'), "'"), 1);
+        return config('services.stack_driver_logger.credentials');
+    }
+
+    protected function getLogName()
+    {
+        return config('services.stack_driver_logger.log_name') ? : 'example-log';
     }
 }
